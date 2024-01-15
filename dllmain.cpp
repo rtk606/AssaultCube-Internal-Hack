@@ -17,7 +17,6 @@ DWORD WINAPI HackThread(HMODULE hModule) {
 	}
 
 	FILE* file = nullptr;
-
 	// Redirect stdout to the new console
 	if (freopen_s(&file, "CONOUT$", "w", stdout) != 0) {
 		std::cerr << "Error: freopen_s() failed." << std::endl;
@@ -54,9 +53,15 @@ DWORD WINAPI HackThread(HMODULE hModule) {
 	// Retrieves the base address of the module 'ac_client.exe' typically loaded at 0x00400000 
 	std::uintptr_t moduleBaseAddress = (uintptr_t)GetModuleHandle(L"ac_client.exe");
 
-	bool health = false;
-	bool recoil = false;
-	bool ammo	= false;
+	// Some variables we'll need
+	Player* localPlayer = *(Player**)(moduleBaseAddress + 0x10F4F4);
+
+	bool health   = false;
+	bool recoil   = false;
+	bool ammo	  = false;
+	bool cordsSet = false;
+
+	std::vector<float> coordinates(3);
 
 	// Main hack loop
 	while (true) {
@@ -85,37 +90,39 @@ DWORD WINAPI HackThread(HMODULE hModule) {
 		}
 		// Set teleport coordinates
 		if (GetAsyncKeyState(VK_NUMPAD4) & 1) {
-			/*
-			vec3 coordinates;
+			if (localPlayer) {
+				coordinates[0] = localPlayer->posCoord.x;
+				coordinates[1] = localPlayer->posCoord.y;
+				coordinates[2] = localPlayer->posCoord.z;
 
-			coordinates = *(vec3*)Memory::GetDynamicAddress(moduleBaseAddress + 0x10f4f4, { 0x34 });
+				cordsSet = true;
 
-			std::cout << "cord x: " << coordinates.x << std::endl;
-			std::cout << "cord y: " << coordinates.y << std::endl;
-			std::cout << "cord z: " << coordinates.z << std::endl;
-			*/
+				std::cout << "X: " << localPlayer->posCoord.x << "| Y: " << localPlayer->posCoord.y << "| Z: " << localPlayer->posCoord.z << std::endl;
+			}
 		}
 
+		if (GetAsyncKeyState(VK_NUMPAD5) & 1) {
+			if (cordsSet) {
+				localPlayer->posCoord.x = coordinates[0];
+				localPlayer->posCoord.y = coordinates[1];
+				localPlayer->posCoord.z = coordinates[2];
 
-		//std::uintptr_t* localPlayerPtr = reinterpret_cast<uintptr_t*>(moduleBaseAddress + 0x10F4F4);
-
-		// Obtains a pointer to a pointer to a 'Player' object at (moduleBaseAddress + 0x10F4F4)
-		// dereference that to get the actual pointer to the 'Player' and store the resulting 
-		// pointer in localPlayer
-		Player* localPlayer = *(Player**)(moduleBaseAddress + 0x10F4F4);
+				std::cout << "Teleport activated" << std::endl;
+			}
+		}
 
 		// This if check ensures we only execute when we're in-game and not in the main menu
-		if (localPlayerPtr) {
+		if (localPlayer) {
 			// Sets player health to 9999
 			if (health) {
-				*(int*)(*localPlayerPtr + 0xF8) = 9999;
+				localPlayer->health = 9999;
 			}
 			// Sets player ammo to 9999
 			if (ammo) {
-				*(int*)Memory::GetDynamicAddress(moduleBaseAddress + 0x10f4f4, { 0x374, 0x14, 0x0 }) = 9999;
+				*(localPlayer->currentWeaponPtr->ammo) = 9999;
 			}
 		}
-		Sleep(10);
+		Sleep(30);
 	}
 
 	// Clean up resources and exit
