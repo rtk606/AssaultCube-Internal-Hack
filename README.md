@@ -1,5 +1,27 @@
 # AssaultCube-Internal Hack
+A DLL injected internal hack for the game Assault Cube. Please note, this is still very much WIP, but for the time being I have moved on to other projects. Hopefully someone finds it helpful.
 
-This is a veryy basic internal assault cube hack with various features (infinite ammo, teleportation, god mode, no recoil). It is still a WIP, I intend to finish it soon, but for the time being I am focused on other projects, I put it here incase it is of any use to anyone else. 
+**Features:** 
+- Console GUI for showing hack status and features
+  - Infinite Ammo
+  - God mode
+  - No Recoil
+  - Teleportation 
+- Custom functions for
+  - Zeroing bytes (i.e. the bytes responsible for the players gun recoil)
+  - Patching bytes
+  - Stepping through a pointer chain and retrieving the dynamic address of a variable (i.e. the players ammo)
+ 
+**Todo:**
+- Implement aimbot
+- Implement wallhack
+- Implement ImGui hack menu
+- Show feature status (enabled/disabled)
+- Various small fixes and improvements
 
-Disclaimer: This cannot be used online as it was developed for an older version of the game and was created purely for educational purposes.
+## Disclaimer:
+
+This hack was developed solely for educational purproses and doesn't work with the current version of AssaultCube and thus cannot be used online. I do not support disrupting the online gaming experience of others.
+
+## Preview:
+![image](https://github.com/rtk606/AssaultCube-Internal/assets/132792358/6cbea43d-c55b-443f-99ba-c46f46e47692)
