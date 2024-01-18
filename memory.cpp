@@ -1,8 +1,7 @@
 #include "memory.h"
 
 // Patches a sequence of bytes in memory with new data
-void Memory::PatchBytes(BYTE* dst, BYTE* src, unsigned int size)
-{
+void Memory::PatchBytes(BYTE* dst, BYTE* src, unsigned int size) {
 	DWORD oldMemoryProtection;
 
     // Change memory protection of the destination to allow write operations
@@ -29,8 +28,7 @@ void Memory::NopBytes(BYTE* dst, unsigned int size) {
 }
 
 // Calculates a dynamic memory address by navigating through a series of offsets
-std::uintptr_t Memory::GetDynamicAddress(std::uintptr_t baseAddress, std::vector<unsigned int> offsets)
-{
+std::uintptr_t Memory::GetDynamicAddress(std::uintptr_t baseAddress, std::vector<unsigned int> offsets) {
     // Initialize the address with the base addres
     std::uintptr_t address = baseAddress;
 
@@ -41,5 +39,3 @@ std::uintptr_t Memory::GetDynamicAddress(std::uintptr_t baseAddress, std::vector
 
     return address;
 }
-
-

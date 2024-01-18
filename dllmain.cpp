@@ -26,7 +26,7 @@ DWORD WINAPI HackThread(HMODULE hModule) {
 	else {
 	// Simple console menu
 		std::cout << "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << std::endl;
-		std::cout << "*     ReleaseTheKrakens's Internal Trainer: Assault Cube      *" << std::endl;
+		std::cout << "*            RTK's Internal Trainer: Assault Cube             *" << std::endl;
 		std::cout << "*                    github.com/rtk606                        *" << std::endl;
 		std::cout << "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << std::endl;
 		std::cout << "*" << std::endl;
@@ -40,12 +40,12 @@ DWORD WINAPI HackThread(HMODULE hModule) {
 		std::cout << "*" << std::endl;
 		std::cout << "*      [NUMPAD5] TELEPORT" << std::endl;
 		std::cout << "*" << std::endl;
-		std::cout << "*      [NUMPAD6] WALLHACK" << std::endl;
+		std::cout << "*      [NUMPAD6] WALLHACK (TODO)" << std::endl;
 		std::cout << "*" << std::endl;
-		std::cout << "*      [NUMPAD7] AIMBOT" << std::endl;
+		std::cout << "*      [NUMPAD7] AIMBOT (TODO)" << std::endl;
 		std::cout << "*" << std::endl;
 		std::cout << "*" << std::endl;
-		std::cout << "*      [NUMPAD8] EXIT TRAINER" << std::endl;
+		std::cout << "*      [NUMPAD8] EXIT TRAINER (TODO)" << std::endl;
 		std::cout << "*" << std::endl;
 		std::cout << "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*" << std::endl;
 	}
